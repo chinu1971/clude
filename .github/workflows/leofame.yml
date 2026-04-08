@@ -1,0 +1,30 @@
+name: Leofame Daily Automation
+
+on:
+  schedule:
+    - cron: "30 3 * * *"   # 2:30 AM UTC = 8:00 AM IST
+  workflow_dispatch:         # also allows manual run from GitHub
+
+jobs:
+  run-automation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager requests selenium-stealth fake-useragent
+
+      - name: Run automation
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          INSTAGRAM_LINK: ${{ secrets.INSTAGRAM_LINK }}
+        run: python main.py
