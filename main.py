@@ -29,17 +29,23 @@ log = logging.getLogger(__name__)
 
 # --- Argument parser ---
 parser = argparse.ArgumentParser(description="Leofame Instagram Automation")
-parser.add_argument("--link", default=os.environ.get("INSTAGRAM_LINK", "https://www.instagram.com/reel/DWv-n0PCbgM/?igsh=MWdpemQ1NmR3cTFoaw=="))
+parser.add_argument(
+    "--link",
+    default=os.environ.get(
+        "INSTAGRAM_LINK",
+        "https://www.instagram.com/reel/DWwKjHqkkAm/?igsh=djUzOHNvbWxlYzVs"
+    )
+)
 parser.add_argument("--wait-min", type=int, default=60)
 parser.add_argument("--wait-max", type=int, default=90)
 args = parser.parse_args()
 
 # --- Config ---
-INSTAGRAM_LINK     = args.link
-WAIT_MIN           = args.wait_min
-WAIT_MAX           = args.wait_max
+INSTAGRAM_LINK = args.link
+WAIT_MIN = args.wait_min
+WAIT_MAX = args.wait_max
 TELEGRAM_BOT_TOKEN = os.environ["8793923431:AAH5eX0CGpos4v6u1XEMO8LTLxPm-QcH3rA"]
-TELEGRAM_CHAT_ID   = os.environ["1814769108"]
+TELEGRAM_CHAT_ID = os.environ["1814769108"]
 
 URLS = [
     "https://leofame.com/free-instagram-views",
@@ -152,7 +158,7 @@ def submit_all_services():
         return
 
     driver = build_driver()
-    wait   = WebDriverWait(driver, 25)
+    wait = WebDriverWait(driver, 25)
     results = []
 
     try:
@@ -199,7 +205,7 @@ def submit_all_services():
                 send_to_telegram(shot1, f"{page_name} - after click")
                 shot1.unlink()
 
-                # Random wait 60–90 seconds
+                # Random wait
                 wait_time = random.uniform(WAIT_MIN, WAIT_MAX)
                 log.info(f"Waiting {wait_time:.1f}s...")
                 time.sleep(wait_time)
@@ -227,7 +233,7 @@ def submit_all_services():
 
     # --- Final summary ---
     success = sum(1 for r in results if r["status"] == "success")
-    failed  = sum(1 for r in results if r["status"] == "failed")
+    failed = sum(1 for r in results if r["status"] == "failed")
     blocked = sum(1 for r in results if r["status"] == "blocked")
 
     summary = (
@@ -235,6 +241,7 @@ def submit_all_services():
         f"Success: {success} | Failed: {failed} | Blocked: {blocked}\n\n"
         + "\n".join(f"  {r['page']}: {r['status']}" for r in results)
     )
+
     send_text_to_telegram(summary)
     save_log(results)
     log.info(summary)
