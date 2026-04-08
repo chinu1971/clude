@@ -25,7 +25,5 @@ jobs:
 
       - name: Run automation
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           INSTAGRAM_LINK: ${{ secrets.INSTAGRAM_LINK }}
         run: python main.py
