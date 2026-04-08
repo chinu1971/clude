@@ -32,7 +32,7 @@ parser.add_argument(
     "--link",
     default=os.environ.get(
         "INSTAGRAM_LINK",
-        "https://www.instagram.com/reel/DWv-n0PCbgM/?igsh=MWdpemQ1NmR3cTFoaw=="
+        "https://www.instagram.com/reel/DWv-n0PCbgM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
     )
 )
 parser.add_argument("--wait-min", type=int, default=60)
