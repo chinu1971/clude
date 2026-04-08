@@ -29,7 +29,7 @@ log = logging.getLogger(__name__)
 
 # --- Argument parser ---
 parser = argparse.ArgumentParser(description="Leofame Instagram Automation")
-parser.add_argument("--link", default=os.environ.get("INSTAGRAM_LINK", "https://www.instagram.com/reel/DWwKjHqkkAm/?igsh=djUzOHNvbWxlYzVs"))
+parser.add_argument("--link", default=os.environ.get("INSTAGRAM_LINK", "https://www.instagram.com/reel/DWv-n0PCbgM/?igsh=MWdpemQ1NmR3cTFoaw=="))
 parser.add_argument("--wait-min", type=int, default=60)
 parser.add_argument("--wait-max", type=int, default=90)
 args = parser.parse_args()
